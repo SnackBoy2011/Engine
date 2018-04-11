@@ -1,5 +1,6 @@
 #pragma once
 #include "System.h"
+#include <map>
 
 namespace core
 {
@@ -12,6 +13,8 @@ namespace core
 		bool m_upPressed = false;
 		bool m_downPressed = false;
 
+		std::map<unsigned int, bool> keys;
+
 	public:
 		InputSystem ();
 		~InputSystem ();
@@ -22,6 +25,8 @@ namespace core
 		inline bool IsRightPressed () const { return m_rightPressed; }
 		inline bool IsUpPressed () const { return m_upPressed; }
 		inline bool IsDownPressed () const { return m_downPressed; }
+
+		bool IsKeyDown(unsigned int key);
 
 		inline bool QuitResquested () const { return quitResquested; }
 	};

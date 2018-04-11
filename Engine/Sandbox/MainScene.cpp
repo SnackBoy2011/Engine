@@ -26,11 +26,19 @@ bool MainScene::init ()
 
 void MainScene::update ()
 {
-	if (inputSystem->IsLeftPressed ())
+
+	if(inputSystem->IsKeyDown(SDLK_UP))
+		player.transform.y -= 1;
+
+	if (inputSystem->IsKeyDown(SDLK_DOWN))
+		player.transform.y += 1;
+
+	if (inputSystem->IsKeyDown (SDLK_LEFT))
 		player.transform.x -= 1;
 
-	if (inputSystem->IsRightPressed ())
+	if (inputSystem->IsKeyDown (SDLK_RIGHT))
 		player.transform.x += 1;
+
 
 	// TODO check for up and down
 

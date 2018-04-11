@@ -26,31 +26,26 @@ namespace core
 			switch (e.type)
 			{
 			case SDL_KEYDOWN:
-				switch (e.key.keysym.sym)
-				{
-				case SDLK_LEFT:
-					m_leftPressed = true;
-					break;
-				case SDLK_RIGHT:
-					m_rightPressed = true;
-					break;
-				}
+				keys[e.key.keysym.sym] = true;
 				break;
 			case SDL_KEYUP:
-				switch (e.key.keysym.sym)
-				{
-				case SDLK_LEFT:
-					m_leftPressed = false;
-					break;
-				case SDLK_RIGHT:
-					m_rightPressed = false;
-					break;
-				}
+				keys[e.key.keysym.sym] = false;
 				break;
 			case SDL_QUIT:
 				quitResquested = true;
 				break;
 			}
 		}
+	}
+
+
+	bool InputSystem::IsKeyDown(unsigned int key) 
+	{
+		auto it = keys.find(key);
+
+		if (it != keys.end())
+			return keys[key];
+
+		return false;
 	}
 }
