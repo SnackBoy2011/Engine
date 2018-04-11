@@ -3,6 +3,7 @@
 #include <Engine.h>
 #include <SystemManager.h>
 #include <InputSystem.h>
+#include <GameObject.h>
 #include <iostream>
 #include "Player.h"
 #include <SDL.h>
@@ -10,6 +11,7 @@
 MainScene::MainScene () :
 	player("player.bmp")
 {
+	gameObjects.push_back(&player);
 }
 
 
@@ -21,11 +23,12 @@ bool MainScene::init ()
 {
 	inputSystem = dynamic_cast<core::InputSystem*>(core::SystemManager::GetInstance ()->GetSystem (core::SystemType::INPUT));
 
-	return true;
+	return Scene::init();
 }
 
 void MainScene::update ()
 {
+	Scene::update(); 
 
 	if(inputSystem->IsKeyDown(SDLK_UP))
 		player.transform.y -= 1;
@@ -46,15 +49,20 @@ void MainScene::update ()
 	// draw the player
 	SDL_Surface *windowSurface = engine->getSurface ();
 	// notice the function to draw the player scaled down
-	SDL_BlitSurface (player.objectImage, NULL, windowSurface, &player.transform);
+	
+	for (scene::GameObject* go : gameObjects)
+		go->draw(windowSurface);
+
 }
 
 void MainScene::draw () const
 {
+	Scene::draw();
 	SDL_UpdateWindowSurface (engine->getWindow());
 }
 
 bool MainScene::shutdown ()
 {
-	return true;
+
+	return Scene::shutdown();;
 }

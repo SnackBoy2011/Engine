@@ -10,7 +10,7 @@ namespace scene
 {
 	class Scene
 	{
-	private:
+	protected:
 		std::vector<class GameObject*> gameObjects;
 	public:
 		core::Engine* engine;
