@@ -3,10 +3,10 @@
 Player::Player (std::string path) :
 	GameObject(path)
 {
-	transform.y = 10;
-	transform.x = 10;
-	transform.w = 100;
-	transform.h = 100;
+	transform.y = 500;
+	transform.x = 500;
+	transform.w = 90;
+	transform.h = 90;
 }
 
 Player::~Player ()

@@ -25,16 +25,13 @@ namespace scene
 	{
 
 	}
-
-	void GameObject::draw(SDL_Surface * surface)
-	{
-		SDL_BlitSurface(objectImage, NULL, surface, &transform);
-
-	}
-
 	void GameObject::draw () const
 	{
 
+	}
+	void GameObject::draw(SDL_Surface* surface)
+	{
+		SDL_BlitSurface(objectImage, NULL, surface, &transform);
 	}
 	bool GameObject::shutdown ()
 	{

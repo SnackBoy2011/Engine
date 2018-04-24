@@ -3,15 +3,17 @@
 #include <Engine.h>
 #include <SystemManager.h>
 #include <InputSystem.h>
-#include <GameObject.h>
 #include <iostream>
 #include "Player.h"
 #include <SDL.h>
+#include <GameObject.h>
+#include"Enemy.h"
 
 MainScene::MainScene () :
-	player("player.bmp")
+	player("player.bmp"),enemy("alien.bmp")
 {
 	gameObjects.push_back(&player);
+	gameObjects.push_back(&enemy);
 }
 
 
@@ -21,38 +23,35 @@ MainScene::~MainScene ()
 
 bool MainScene::init ()
 {
+	Scene::init();
 	inputSystem = dynamic_cast<core::InputSystem*>(core::SystemManager::GetInstance ()->GetSystem (core::SystemType::INPUT));
 
-	return Scene::init();
+	return true;
 }
 
 void MainScene::update ()
 {
-	Scene::update(); 
-
-	if(inputSystem->IsKeyDown(SDLK_UP))
-		player.transform.y -= 1;
-
-	if (inputSystem->IsKeyDown(SDLK_DOWN))
-		player.transform.y += 1;
-
-	if (inputSystem->IsKeyDown (SDLK_LEFT))
+	Scene::update();
+	//enemy.Update();
+	if(inputSystem->isKeyDown(SDLK_LEFT))
 		player.transform.x -= 1;
-
-	if (inputSystem->IsKeyDown (SDLK_RIGHT))
+	if (inputSystem->isKeyDown(SDLK_RIGHT))
 		player.transform.x += 1;
-
-
-	// TODO check for up and down
-
+	if (inputSystem->isKeyDown(SDLK_UP))
+		player.transform.y -= 1;
+	if (inputSystem->isKeyDown(SDLK_DOWN))
+		player.transform.y += 1;
 	
 	// draw the player
 	SDL_Surface *windowSurface = engine->getSurface ();
 	// notice the function to draw the player scaled down
-	
-	for (scene::GameObject* go : gameObjects)
-		go->draw(windowSurface);
+//	SDL_BlitSurface (player.objectImage, NULL, windowSurface, &player.transform);
 
+	for (scene::GameObject* go : gameObjects)
+	{
+		go->draw(windowSurface);
+		//go->update();
+	}
 }
 
 void MainScene::draw () const
@@ -61,8 +60,9 @@ void MainScene::draw () const
 	SDL_UpdateWindowSurface (engine->getWindow());
 }
 
+
 bool MainScene::shutdown ()
 {
-
-	return Scene::shutdown();;
+	Scene::shutdown();
+	return true;
 }

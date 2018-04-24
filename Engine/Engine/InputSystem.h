@@ -26,9 +26,11 @@ namespace core
 		inline bool IsUpPressed () const { return m_upPressed; }
 		inline bool IsDownPressed () const { return m_downPressed; }
 
-		bool IsKeyDown(unsigned int key);
+		bool isKeyDown(unsigned int key);
 
 		inline bool QuitResquested () const { return quitResquested; }
 	};
 }
 
+///old_keys
+///new_keys

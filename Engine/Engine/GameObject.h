@@ -15,7 +15,7 @@ namespace scene
 		virtual bool init ();
 		virtual void update ();
 		virtual void draw () const;
-		virtual void draw(SDL_Surface * surface);
+		virtual void draw(SDL_Surface* surface) ;
 		virtual bool shutdown ();
 	};
 }
